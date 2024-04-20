@@ -5,9 +5,16 @@ import {
   on,
 } from '@ngrx/store';
 
-
-import { UserMessage, mapToUserMessage, mapToUserMessages } from '../model/message.model';
-import { UserMessageCreatedAction, loadUserMessagesAction, setUserMessagesAction } from './messages.actions';
+import {
+  UserMessage,
+  mapToUserMessage,
+  mapToUserMessages,
+} from '../model/message.model';
+import {
+  UserMessageCreatedAction,
+  loadUserMessagesAction,
+  setUserMessagesAction,
+} from './messages.actions';
 
 export interface MessageState {
   messages: UserMessage[];
@@ -38,29 +45,17 @@ export const messagesReducer = createReducer(
     messages.push(mapToUserMessage(action.payload.userMessage));
     const newState = { ...state, messages: messages };
     return newState;
-  }),
-
-
+  })
 );
 
-export const getUsersState =
+export const getMessagesState =
   createFeatureSelector<MessageState>(MESSAGES_FEATURE_KEY);
 
 export const selectAll = createSelector(
-  getUsersState,
-  (state: UsersState) => state
+  getMessagesState,
+  (state: MessageState) => state
 );
 
-export const selectAllUsers = createSelector(selectAll, (state) =>
-  mapToUsers(state.Users)
-);
-
-export const selectUsersLoaded = createSelector(
-  selectAll,
-  (state) => state.UsersLoaded
-);
-
-export const selectCurrentUser = createSelector(
-  selectAll,
-  (state) => state.currentUser
+export const selectAllMessages = createSelector(selectAll, (state) =>
+  mapToUserMessages(state.messages)
 );

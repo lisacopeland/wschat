@@ -5,7 +5,7 @@ import { UserMessage } from '../model/message.model';
 
 export const loadUserMessagesAction = createAction(
   'UserMessages: Load All',
-  props<{ search: Partial<UserMessage>; index: string }>()
+  props<{ payload: {}}>()
 );
 export const setUserMessagesAction = createAction(
   'UserMessages: Set All',
