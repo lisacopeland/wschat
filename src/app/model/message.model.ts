@@ -2,6 +2,7 @@ export function deepCopy<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj)) as T;
 }
 export class UserMessage {
+  _id?: string;
   userName: string;
   message: string;
   messageDate: Date;
@@ -12,9 +13,6 @@ export class UserMessage {
     });
   }
 
-  clone() {
-    return new UserMessage(deepCopy(this));
-  }
 }
 
 export function mapToUserMessage(data: any): UserMessage {

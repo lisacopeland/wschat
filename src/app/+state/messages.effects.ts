@@ -5,18 +5,19 @@ import { map, mergeMap } from 'rxjs/operators';
 
 import { WebsocketService } from '../service/websocket.service';
 import { loadUserMessagesAction, setUserMessagesAction, createUserMessageAction, UserMessageCreatedAction } from './messages.actions';
+import { UserMessagesService } from '../service/messages.service';
 
 @Injectable()
 export class UserMessagesEffects {
   concurrentRequests = 5;
 
-  constructor(public service: WebsocketService, public actions$: Actions) {}
+  constructor(public service: UserMessagesService, public actions$: Actions) {}
 
   loadUserMessages$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUserMessagesAction),
       mergeMap((action) => {
-        return this.service.getUserMessages('1').pipe(
+        return this.service.getUserMessages().pipe(
           map((response) => {
             return setUserMessagesAction({ payload: response });
           })
@@ -29,7 +30,7 @@ export class UserMessagesEffects {
     this.actions$.pipe(
       ofType(createUserMessageAction),
       mergeMap((action) => {
-        return this.service.sendChatMessage(action.payload).pipe(
+        return this.service.createUserMessage(action.payload).pipe(
           map((response) => {
             return UserMessageCreatedAction({
               payload: { userMessage: action.payload },

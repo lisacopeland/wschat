@@ -1,15 +1,43 @@
+<p-menu #menu [model]="items" popup="true" appendTo="body" />
 <div class="page">
-  <div class="history">
-    <!-- this is where the current messages go -->
+  <div class="header">
+    <h3>Chat App</h3>
+    <div class="header-name">
+      <div>Hello {{ userName }}</div>
+      <p-button
+        (click)="menu.toggle($event)"
+        icon="pi pi-bars"
+        [rounded]="true"
+        [text]="true"
+      />
+    </div>
   </div>
-  <form>
+
+  <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+    <!-- this is where the current messages go -->
+    <p-card class="message" *ngFor="let message of messages">
+      <div>{{ message.message }}</div>
+
+      <div class="message-footer">
+        <p>{{ message.userName }}</p>
+        <p>{{ message.messageDate | date : "medium" }}</p>
+      </div>
+    </p-card>
+  </p-scrollPanel>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="textbox">
       <!-- the text window -->
-      <textarea> </textarea>
+      <textarea pInputTextarea formControlName="message" rows="5" cols="125">
+      </textarea>
     </div>
     <div class="button-row">
-      <button>Submit</button>
-      <button>Clear</button>
+      <p-button type="submit" label="Submit" [disabled]="!form.valid" />
+      <p-button
+        label="Clear"
+        severity="secondary"
+        type="button"
+        (click)="onClear()"
+      />
     </div>
   </form>
 </div>
