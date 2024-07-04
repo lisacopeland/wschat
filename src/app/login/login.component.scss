@@ -1,0 +1,25 @@
+.login-card {
+  display: block;
+  height: 250px;
+  width: 30%;
+  margin: 50px;
+  padding: 50px;
+  border: 1px solid red;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  width: 200px;
+  margin: 10px 0px;
+  height: 20px;
+}
+
+.submit-button {
+  width: 100px;
+  margin: 20px 0px;
+  height: 20px;
+}

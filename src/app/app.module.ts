@@ -15,13 +15,24 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
 import { PanelModule } from 'primeng/panel';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { SignupComponent } from './signup/signup.component';
+import { userReducer } from './+state/user.reducer';
+import { UserEffects } from './+state/user.effects';
+import { ChatComponent } from './chat/chat.component';
+import { LoginComponent } from './login/login.component';
+import { authReducer } from './+state/auth.reducers';
+import { AuthEffects } from './+state/auth.effects';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignupComponent,
+    ChatComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +42,13 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     ReactiveFormsModule,
     ButtonModule,
     CardModule,
+    DialogModule,
     InputTextareaModule,
     MenuModule,
     PanelModule,
     ScrollPanelModule,
-    StoreModule.forRoot({ Messages: messagesReducer }),
-    EffectsModule.forRoot([UserMessagesEffects]),
+    StoreModule.forRoot({ messages: messagesReducer, users: userReducer, auth: authReducer }),
+    EffectsModule.forRoot([UserMessagesEffects, UserEffects, AuthEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     AppRoutingModule
   ],

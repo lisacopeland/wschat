@@ -1,60 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { createUserMessageAction, loadUserMessagesAction } from './+state/messages.actions';
 import { Store } from '@ngrx/store';
 import { WebsocketService } from './service/websocket.service';
-import { selectAllMessages } from './+state/messages.reducer';
-import { UserMessage } from './model/message.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
+import { logOutUserAction } from './+state/auth.actions';
+import { User } from './model/user.model';
+import { selectUser } from './+state/auth.reducers';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private store: Store, private websocketService: WebsocketService, private fb:FormBuilder) {}
+  constructor(
+    private store: Store,
+    private websocketService: WebsocketService,
+    private router: Router
+  ) {}
   title = 'ws-chat';
-  messages: UserMessage[];
-  userName = "Anonymous";
+  currentUser: User;
+  loggedIn = false;
   items: MenuItem[] = [
     {
-        label: 'Change User',
-        icon: 'pi pi-plus',
-        command: () => {
-            this.updateUser();
-        }
-    }
-];
-
-  form: FormGroup;
+      label: 'Logout',
+      icon: 'pi pi-plus',
+      command: () => {
+        this.logout();
+      },
+    },
+  ];
 
   ngOnInit() {
     this.websocketService.startSocket();
-    this.store.dispatch(loadUserMessagesAction({ payload: {}}));
-    this.store.select(selectAllMessages).subscribe((messages) => {
-      this.messages = messages;
+    this.store.select(selectUser).subscribe((user) => {
+      if (user !== null) {
+        this.currentUser = user;
+        this.loggedIn = true;
+        this.router.navigateByUrl('chat');
+      }
     });
-    this.form = this.fb.group({
-      message: ['', [Validators.maxLength(150), Validators.minLength(3)]]
-    });
   }
 
-  updateUser() {
-
+  logout() {
+    this.loggedIn = false;
+    this.currentUser = null;
+    this.store.dispatch(
+      logOutUserAction({ payload: { user: this.currentUser } })
+    );
+    this.router.navigateByUrl('login');
   }
-
-  onClear() {
-    this.form.controls['message'].reset();
-  }
-
-  onSubmit() {
-    const newMessage: UserMessage = {
-      userName: 'Lisa',
-      message: this.form.controls['message'].value,
-      messageDate: new Date()
-    }
-    this.store.dispatch(createUserMessageAction({ payload: newMessage}));
-  }
-
 }

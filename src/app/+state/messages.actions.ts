@@ -16,9 +16,13 @@ export const createUserMessageAction = createAction(
   'UserMessages: Create',
   props<{ payload: UserMessage }>()
 );
-export const UserMessageCreatedAction = createAction(
+export const userMessageCreatedAction = createAction(
   'UserMessages: Created',
   props<{ payload: { userMessage: UserMessage } }>()
+);
+export const setMessagesErrorAction = createAction(
+  'UserMessages: Messages Error',
+  props<{ payload: { error: string } }>()
 );
 
 

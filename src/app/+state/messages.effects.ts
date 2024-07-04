@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
-
-
-import { WebsocketService } from '../service/websocket.service';
-import { loadUserMessagesAction, setUserMessagesAction, createUserMessageAction, UserMessageCreatedAction } from './messages.actions';
+import { loadUserMessagesAction, setUserMessagesAction, createUserMessageAction, userMessageCreatedAction } from './messages.actions';
 import { UserMessagesService } from '../service/messages.service';
 
 @Injectable()
@@ -32,7 +29,7 @@ export class UserMessagesEffects {
       mergeMap((action) => {
         return this.service.createUserMessage(action.payload).pipe(
           map((response) => {
-            return UserMessageCreatedAction({
+            return userMessageCreatedAction({
               payload: { userMessage: action.payload },
             });
           })

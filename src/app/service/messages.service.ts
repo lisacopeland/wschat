@@ -2,36 +2,38 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserMessage } from '../model/message.model';
+import { ApiResponse } from '../model/ApiResponse.model';
 
 
-export const baseUserMessageUrl = 'https://localhost:7008/api/messages';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserMessagesService {
+  baseUserMessageUrl = 'https://localhost:7008/api/messages';
   constructor(private http: HttpClient) {}
 
   getUserMessage(id: number): Observable<UserMessage> {
-    return this.http.get<UserMessage>(`${baseUserMessageUrl}/${id}`);
+    return this.http.get<UserMessage>(`${this.baseUserMessageUrl}/${id}`);
   }
 
   getUserMessages(): Observable<UserMessage[]> {
-    return this.http.get<UserMessage[]>(`${baseUserMessageUrl}`);
+    return this.http.get<UserMessage[]>(`${this.baseUserMessageUrl}`);
   }
 
   createUserMessage(UserMessage: UserMessage) {
-    return this.http.post<void>(`${baseUserMessageUrl}`, UserMessage);
+    return this.http.post<ApiResponse>(`${this.baseUserMessageUrl}`, UserMessage);
   }
 
   updateUserMessage(UserMessage: UserMessage) {
-    return this.http.put<void>(
-      `${baseUserMessageUrl}/${UserMessage._id}`,
+    return this.http.put<ApiResponse>(
+      `${this.baseUserMessageUrl}/${UserMessage._id}`,
       UserMessage
     );
   }
 
   delete(id: number) {
-    return this.http.delete<void>(`${baseUserMessageUrl}/${id}`);
+    return this.http.delete<ApiResponse>(`${this.baseUserMessageUrl}/${id}`);
   }
 }

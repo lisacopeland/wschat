@@ -1,0 +1,14 @@
+<div class="login-card">
+  <div style="margin: 20px 0px;">
+    Login to the app
+  </div>
+  <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="onSubmit()">
+    <div class="login-form">
+
+      <input id="username" class="input-field" type="text" formControlName="username" placeholder="User name" />
+      <input id="password" class="input-field" type="password" formControlName="password" placeholder="Password" />
+      <button class="submit-button" [disabled]="!loginForm.valid" id="submit" type="submit">Submit</button>
+      <a routerLink="/signup">Switch to signup</a>
+    </div>
+  </form>
+</div>

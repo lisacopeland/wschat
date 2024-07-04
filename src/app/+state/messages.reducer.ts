@@ -11,7 +11,7 @@ import {
   mapToUserMessages,
 } from '../model/message.model';
 import {
-  UserMessageCreatedAction,
+  userMessageCreatedAction,
   loadUserMessagesAction,
   setUserMessagesAction,
 } from './messages.actions';
@@ -33,14 +33,13 @@ export const messagesReducer = createReducer(
     return newState;
   }),
   on(setUserMessagesAction, (state, action) => {
-    console.log('setting Users action!');
     const newState = {
       ...state,
       messages: mapToUserMessages(action.payload),
     };
     return newState;
   }),
-  on(UserMessageCreatedAction, (state, action) => {
+  on(userMessageCreatedAction, (state, action) => {
     const messages = [...state.messages];
     messages.push(mapToUserMessage(action.payload.userMessage));
     const newState = { ...state, messages: messages };
