@@ -6,7 +6,6 @@ import {
 } from '@ngrx/store';
 import {
   loginAction,
-  logOutUserAction,
   setAuthErrorAction,
   userLoggedInAction,
   userLoggedOutAction
@@ -51,7 +50,7 @@ export const authReducer = createReducer(
   }),
   on(userLoggedOutAction, (state, action) => {
     sessionStorage.clear();
-    const newState = { ...state, user: null, userLoggedIn: false };
+    const newState = { ...state, user: null, userLoggedIn: false, authError: null };
     return newState;
   })
 );

@@ -15,7 +15,7 @@ export interface UserState {
 
 const initialState: UserState = {
   loggedInUsers: [],
-  userError: '',
+  userError: null,
   userSignedup: false
 };
 
@@ -31,6 +31,7 @@ export const userReducer = createReducer(
     const newState = {
       ...state,
       loggedInUsers: mapToUsers(action.payload),
+      userError: null
     };
     return newState;
   }),
@@ -44,11 +45,11 @@ export const userReducer = createReducer(
   }),
 
   on(userSignedupAction, (state, action) => {
-    const newState = { ...state, userSignedup: true };
+    const newState = { ...state, userSignedup: true, userError: null };
     return newState;
   }),
   on(signupUserAction, (state, action) => {
-    const newState = { ...state, userSignedup: false };
+    const newState = { ...state, userSignedup: false, userError: null };
     return newState;
   }),
   on(userExitedAction, (state, action) => {

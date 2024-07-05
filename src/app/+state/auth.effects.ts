@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, of } from 'rxjs';
 import {
   loginAction,
@@ -8,18 +8,13 @@ import {
   userLoggedInAction,
   userLoggedOutAction,
 } from './auth.actions';
-import { Store } from '@ngrx/store';
 import { AuthService } from '../service/auth.service';
 
 @Injectable()
 export class AuthEffects {
   concurrentRequests = 5;
 
-  constructor(
-    public service: AuthService,
-    public actions$: Actions,
-    private store: Store
-  ) {}
+  constructor(public service: AuthService, public actions$: Actions) {}
 
   signIn$ = createEffect(() =>
     this.actions$.pipe(
@@ -36,7 +31,7 @@ export class AuthEffects {
             catchError((error) => {
               return of(
                 setAuthErrorAction({
-                  payload: { error: error.error.message },
+                  payload: { error: error.error },
                 })
               );
             })
@@ -51,14 +46,14 @@ export class AuthEffects {
       mergeMap((action) => {
         return this.service.signOut(action.payload.user._id).pipe(
           map((response) => {
-              return userLoggedOutAction({
-                payload: {},
-              });
+            return userLoggedOutAction({
+              payload: {},
+            });
           }),
           catchError((error) => {
             return of(
               setAuthErrorAction({
-                payload: { error: error.message },
+                payload: { error: error.error },
               })
             );
           })

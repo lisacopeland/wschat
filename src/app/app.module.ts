@@ -20,6 +20,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { PanelModule } from 'primeng/panel';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { SidebarModule } from 'primeng/sidebar';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { ToastModule } from 'primeng/toast';
+
 import { SignupComponent } from './signup/signup.component';
 import { userReducer } from './+state/user.reducer';
 import { UserEffects } from './+state/user.effects';
@@ -28,8 +33,10 @@ import { LoginComponent } from './login/login.component';
 import { authReducer } from './+state/auth.reducers';
 import { AuthEffects } from './+state/auth.effects';
 import { ErrorInterceptor } from './service/http.interceptor';
+import { UserlistComponent } from './userlist/userlist.component';
+
 @NgModule({
-  declarations: [AppComponent, SignupComponent, ChatComponent, LoginComponent],
+  declarations: [AppComponent, SignupComponent, ChatComponent, LoginComponent, UserlistComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -44,6 +51,10 @@ import { ErrorInterceptor } from './service/http.interceptor';
     MenuModule,
     PanelModule,
     ScrollPanelModule,
+    SidebarModule,
+    TableModule,
+    TagModule,
+    ToastModule,
     StoreModule.forRoot({
       messages: messagesReducer,
       users: userReducer,

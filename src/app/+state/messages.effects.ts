@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
-import { loadUserMessagesAction, setUserMessagesAction, createUserMessageAction, userMessageCreatedAction } from './messages.actions';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import {
+  loadUserMessagesAction,
+  setUserMessagesAction,
+  createUserMessageAction,
+  userMessageCreatedAction,
+  setMessagesErrorAction,
+} from './messages.actions';
 import { UserMessagesService } from '../service/messages.service';
+import { of } from 'rxjs';
 
 @Injectable()
 export class UserMessagesEffects {
@@ -17,6 +24,13 @@ export class UserMessagesEffects {
         return this.service.getUserMessages().pipe(
           map((response) => {
             return setUserMessagesAction({ payload: response });
+          }),
+          catchError((error) => {
+            return of(
+              setMessagesErrorAction({
+                payload: { error: error.error },
+              })
+            );
           })
         );
       }, this.concurrentRequests)
@@ -32,6 +46,13 @@ export class UserMessagesEffects {
             return userMessageCreatedAction({
               payload: { userMessage: action.payload },
             });
+          }),
+          catchError((error) => {
+            return of(
+              setMessagesErrorAction({
+                payload: { error: error.error },
+              })
+            );
           })
         );
       }, this.concurrentRequests)

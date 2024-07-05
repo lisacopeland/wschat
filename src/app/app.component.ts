@@ -7,6 +7,7 @@ import { logOutUserAction, userLoggedInAction } from './+state/auth.actions';
 import { User } from './model/user.model';
 import { selectUser, selectUserLoggedIn } from './+state/auth.reducers';
 import { AuthService } from './service/auth.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,12 @@ export class AppComponent implements OnInit {
   ];
 
   ngOnInit() {
-    console.log('logged in is ', this.loggedIn);
+    console.info(
+      'environment.production is ',
+      environment.production,
+      ' apiUrl is ',
+      environment.apiUrl
+    );
     this.websocketService.startSocket();
     // See if there is already a loggedin user
     const user = this.authService.getSignedInUser();

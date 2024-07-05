@@ -15,14 +15,14 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(loadLoggedInUsersAction),
       mergeMap((action) => {
-        return this.service.getLoggedInUsers().pipe(
+        return this.service.getUsers().pipe(
           map((response) => {
             return setUsersAction({ payload: response });
           }),
           catchError((error) => {
             return of(
               setUserErrorAction({
-                payload: { error: error.error.message },
+                payload: { error: error.error },
               })
             );
           })
@@ -47,7 +47,7 @@ export class UserEffects {
             catchError((error) => {
               return of(
                 setUserErrorAction({
-                  payload: { error: error.error.message },
+                  payload: { error: error.error },
                 })
               );
             })

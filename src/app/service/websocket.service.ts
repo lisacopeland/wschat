@@ -5,6 +5,7 @@ import { UserMessage } from '../model/message.model';
 import { userMessageCreatedAction } from '../+state/messages.actions';
 import { Store } from '@ngrx/store';
 import { userEnteredAction, userExitedAction } from '../+state/user.actions';
+import { environment } from '../../environments/environment';
 
 export interface WebSocketAction {
   action: string;
@@ -15,10 +16,12 @@ export interface WebSocketAction {
 })
 export class WebsocketService {
   private socket: WebSocket;
+  wsUrl = environment.wsUrl;
+
   constructor(private store: Store) {}
 
   startSocket() {
-    this.socket = new WebSocket('wss://localhost:7008/ws');
+    this.socket = new WebSocket(this.wsUrl);
     this.socket.addEventListener('open', (ev) => {
       console.log('opened');
     });

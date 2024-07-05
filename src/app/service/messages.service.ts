@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserMessage } from '../model/message.model';
 import { ApiResponse } from '../model/ApiResponse.model';
+import { environment } from '../../environments/environment';
 
 
 
@@ -11,7 +12,8 @@ import { ApiResponse } from '../model/ApiResponse.model';
   providedIn: 'root',
 })
 export class UserMessagesService {
-  baseUserMessageUrl = 'https://localhost:7008/api/messages';
+  apiUrl = environment.apiUrl;
+  baseUserMessageUrl = `${this.apiUrl}/api/messages`;
   constructor(private http: HttpClient) {}
 
   getUserMessage(id: number): Observable<UserMessage> {

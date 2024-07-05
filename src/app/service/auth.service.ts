@@ -1,8 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { ApiResponse } from '../model/ApiResponse.model';
 import { User } from '../model/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,8 @@ import { User } from '../model/user.model';
 export class AuthService {
 
   constructor(private http: HttpClient) {}
-  baseAuthUrl = 'https://localhost:7008/api/auth';
+  apiUrl = environment.apiUrl;
+  baseAuthUrl = `${this.apiUrl}/api/auth`;
 
   signIn(email: string, password: string) {
     const authenticationDetails = {
