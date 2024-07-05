@@ -14,10 +14,13 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hasError = false;
   errorMessage = '';
-  constructor(private fb: FormBuilder, private router: Router, private store: Store) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
-
     this.store.select(selectAuthError).subscribe((authError) => {
       this.hasError = true;
       this.errorMessage = authError;
@@ -49,7 +52,4 @@ export class LoginComponent implements OnInit {
       })
     );
   }
-
-
-
 }

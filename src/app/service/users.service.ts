@@ -25,5 +25,4 @@ export class UserService {
   createUser(user: User) {
     return this.http.post<ApiResponse>(`${this.baseUserUrl}`, user);
   }
-
 }

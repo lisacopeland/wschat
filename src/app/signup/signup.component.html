@@ -19,24 +19,24 @@
           formControlName="password"
           placeholder="Password"
         />
-        </div>
-        <div class="form-control">
-          <input
-            id="email"
-            pInputText
-            type="text"
-            formControlName="email"
-            placeholder="Email"
-          />
-        </div>
-        <div class="form-control">
-          <input
-            id="displayName"
-            pInputText
-            type="text"
-            formControlName="displayName"
-            placeholder="Display Name"
-          />
+      </div>
+      <div class="form-control">
+        <input
+          id="email"
+          pInputText
+          type="text"
+          formControlName="email"
+          placeholder="Email"
+        />
+      </div>
+      <div class="form-control">
+        <input
+          id="displayName"
+          pInputText
+          type="text"
+          formControlName="displayName"
+          placeholder="Display Name"
+        />
       </div>
       <div class="button-row">
         <p-button
@@ -55,5 +55,5 @@
       </div>
     </div>
   </form>
-  <div class="error-message" *ngIf="hasError">{{errorMessage}}</div>
+  <div class="error-message" *ngIf="hasError">{{ errorMessage }}</div>
 </div>

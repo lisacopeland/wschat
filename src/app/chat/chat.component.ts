@@ -13,7 +13,10 @@ import { UserMessage } from '../model/message.model';
 import { User } from '../model/user.model';
 import { selectUser } from '../+state/auth.reducers';
 import { loadLoggedInUsersAction } from '../+state/user.actions';
-import { selectAllLoggedInUsers, selectUserError } from '../+state/user.reducer';
+import {
+  selectAllLoggedInUsers,
+  selectUserError,
+} from '../+state/user.reducer';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,7 +27,9 @@ import { Observable } from 'rxjs';
 export class ChatComponent implements OnInit {
   messages$: Observable<UserMessage[]> = this.store.select(selectAllMessages);
   user: User;
-  loggedInUsers$: Observable<User[]> = this.store.select(selectAllLoggedInUsers);
+  loggedInUsers$: Observable<User[]> = this.store.select(
+    selectAllLoggedInUsers
+  );
   form: FormGroup;
   hasError = false;
   errorMessage = '';

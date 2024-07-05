@@ -5,7 +5,7 @@ import { UserMessage } from '../model/message.model';
 
 export const loadUserMessagesAction = createAction(
   'UserMessages: Load All',
-  props<{ payload: {}}>()
+  props<{ payload: {} }>()
 );
 export const setUserMessagesAction = createAction(
   'UserMessages: Set All',
@@ -24,5 +24,3 @@ export const setMessagesErrorAction = createAction(
   'UserMessages: Messages Error',
   props<{ payload: { error: string } }>()
 );
-
-

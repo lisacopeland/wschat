@@ -1,18 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { DogResponse, DogsService } from '../dogs.service';
 
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
-  const mockDogResponse: DogResponse = {
-    message: 'test',
-    status: 'success'
-  }
-  let mockDogService: jasmine.SpyObj<DogsService>;
-  mockDogService = jasmine.createSpyObj('DogService', ['get']);      
-  mockDogService.get.and.returnValue(of(mockDogResponse));
+
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let formElement: HTMLElement;
@@ -28,7 +21,6 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [FormsModule, ReactiveFormsModule],
       providers: [
-        { provide: DogsService, useValue: mockDogService }
       ]
     }).compileComponents();
 
@@ -96,7 +88,5 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(submitButton.disabled).toBeFalsy;
     submitButton.click();
-    expect(mockDogService.get).toHaveBeenCalled();
-    expect(component.dogImgUrl).toBe('test');
   });
 });

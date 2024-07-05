@@ -36,7 +36,13 @@ import { ErrorInterceptor } from './service/http.interceptor';
 import { UserlistComponent } from './userlist/userlist.component';
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, ChatComponent, LoginComponent, UserlistComponent],
+  declarations: [
+    AppComponent,
+    SignupComponent,
+    ChatComponent,
+    LoginComponent,
+    UserlistComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

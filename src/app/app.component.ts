@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     // See if there is already a loggedin user
     const user = this.authService.getSignedInUser();
     if (user !== null) {
-      this.store.dispatch(userLoggedInAction({ payload: { user: user}}));
+      this.store.dispatch(userLoggedInAction({ payload: { user: user } }));
     }
     this.store.select(selectUser).subscribe((user) => {
       if (user !== null) {
@@ -55,13 +55,11 @@ export class AppComponent implements OnInit {
       }
     });
     this.store.select(selectUserLoggedIn).subscribe((isLoggedIn) => {
-
-     if (isLoggedIn === false) {
-      this.loggedIn = false;
-      this.router.navigateByUrl('/login');
-     }
-     console.log('logged in is ', this.loggedIn);
-    })
+      if (isLoggedIn === false) {
+        this.loggedIn = false;
+        this.router.navigateByUrl('/login');
+      }
+    });
   }
 
   logout() {

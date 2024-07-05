@@ -1,9 +1,12 @@
 <div class="page">
-
   <div class="button-row">
     <p-button label="Users" (click)="openUserSidebar()" />
   </div>
-  <p-scrollPanel styleClass="custombar2" scrollTop="10000" [style]="{ width: '100%', height: '500px' }">
+  <p-scrollPanel
+    styleClass="custombar2"
+    scrollTop="10000"
+    [style]="{ width: '100%', height: '500px' }"
+  >
     <!-- this is where the current messages go -->
 
     <p-card class="message" *ngFor="let message of messages$ | async">
@@ -30,11 +33,15 @@
         (click)="onClear()"
       />
     </div>
-    <div class="error-message" *ngIf="hasError">{{errorMessage}}</div>
+    <div class="error-message" *ngIf="hasError">{{ errorMessage }}</div>
   </form>
 </div>
 
-<p-sidebar [(visible)]="displayUsers" position="right" styleClass="p-sidebar-md">
+<p-sidebar
+  [(visible)]="displayUsers"
+  position="right"
+  styleClass="p-sidebar-md"
+>
   <h3>Users</h3>
   <app-userlist [users]="loggedInUsers$ | async"></app-userlist>
 </p-sidebar>

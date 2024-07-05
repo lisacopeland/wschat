@@ -1,11 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from '../model/user.model';
 
-// TODO: Implement an error popup
-
 export const loadLoggedInUsersAction = createAction(
   'Users: Load All',
-  props<{ payload: {}}>()
+  props<{ payload: {} }>()
 );
 export const setUsersAction = createAction(
   'Users: Set All',
@@ -14,12 +12,12 @@ export const setUsersAction = createAction(
 
 export const userEnteredAction = createAction(
   'Users: User Entered',
-  props<{ payload: { user: User }}>()
+  props<{ payload: { user: User } }>()
 );
 
 export const userExitedAction = createAction(
   'Users: User Exited',
-  props<{ payload: { id: string }}>()
+  props<{ payload: { id: string } }>()
 );
 
 export const signupUserAction = createAction(
@@ -34,5 +32,3 @@ export const setUserErrorAction = createAction(
   'Users: Sign up Error',
   props<{ payload: { error: string } }>()
 );
-
-

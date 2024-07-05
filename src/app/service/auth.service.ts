@@ -8,7 +8,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-
   constructor(private http: HttpClient) {}
   apiUrl = environment.apiUrl;
   baseAuthUrl = `${this.apiUrl}/api/auth`;
@@ -25,7 +24,7 @@ export class AuthService {
 
   signOut(userId: string) {
     const body = {
-      id: userId
+      id: userId,
     };
     const url = `${this.baseAuthUrl}/Logout`;
     return this.http.put<ApiResponse>(url, body);
@@ -40,5 +39,4 @@ export class AuthService {
       return null;
     }
   }
-
 }

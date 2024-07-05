@@ -5,9 +5,6 @@ import { UserMessage } from '../model/message.model';
 import { ApiResponse } from '../model/ApiResponse.model';
 import { environment } from '../../environments/environment';
 
-
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -25,7 +22,10 @@ export class UserMessagesService {
   }
 
   createUserMessage(UserMessage: UserMessage) {
-    return this.http.post<ApiResponse>(`${this.baseUserMessageUrl}`, UserMessage);
+    return this.http.post<ApiResponse>(
+      `${this.baseUserMessageUrl}`,
+      UserMessage
+    );
   }
 
   updateUserMessage(UserMessage: UserMessage) {

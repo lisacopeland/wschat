@@ -7,7 +7,7 @@ export const loginAction = createAction(
 );
 export const userLoggedInAction = createAction(
   'Auth: User Logged In',
-  props<{ payload: { user: User }}>()
+  props<{ payload: { user: User } }>()
 );
 
 export const setAuthErrorAction = createAction(
@@ -16,7 +16,7 @@ export const setAuthErrorAction = createAction(
 );
 export const logOutUserAction = createAction(
   'Auth: Log Out',
-  props<{ payload: { user: User}}>()
+  props<{ payload: { user: User } }>()
 );
 export const userLoggedOutAction = createAction(
   'Auth: User Logged Out',

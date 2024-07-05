@@ -24,7 +24,7 @@ export interface MessageState {
 
 const initialState: MessageState = {
   messages: [],
-  messagesError: null
+  messagesError: null,
 };
 
 export const MESSAGES_FEATURE_KEY = 'messages';
@@ -39,14 +39,14 @@ export const messagesReducer = createReducer(
     const newState = {
       ...state,
       messages: mapToUserMessages(action.payload),
-      messagesError: null
+      messagesError: null,
     };
     return newState;
   }),
   on(setMessagesErrorAction, (state, action) => {
     const newState = {
       ...state,
-      messagesError: action.payload.error
+      messagesError: action.payload.error,
     };
     return newState;
   }),
@@ -67,7 +67,9 @@ export const selectAll = createSelector(
 );
 
 export const selectAllMessages = createSelector(selectAll, (state) =>
-  (state.messages !== null && state.messages.length > 0) ? mapToUserMessages(state.messages) : []
+  state.messages !== null && state.messages.length > 0
+    ? mapToUserMessages(state.messages)
+    : []
 );
 export const selectMessagesError = createSelector(
   selectAll,

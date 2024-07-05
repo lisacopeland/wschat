@@ -8,7 +8,7 @@ import {
   loginAction,
   setAuthErrorAction,
   userLoggedInAction,
-  userLoggedOutAction
+  userLoggedOutAction,
 } from './auth.actions';
 import { User } from '../model/user.model';
 
@@ -21,7 +21,7 @@ export interface AuthState {
 const initialState: AuthState = {
   user: null,
   authError: null,
-  userLoggedIn: false
+  userLoggedIn: false,
 };
 
 export const AUTH_FEATURE_KEY = 'auth';
@@ -50,7 +50,12 @@ export const authReducer = createReducer(
   }),
   on(userLoggedOutAction, (state, action) => {
     sessionStorage.clear();
-    const newState = { ...state, user: null, userLoggedIn: false, authError: null };
+    const newState = {
+      ...state,
+      user: null,
+      userLoggedIn: false,
+      authError: null,
+    };
     return newState;
   })
 );
@@ -67,11 +72,9 @@ export const selectUserLoggedIn = createSelector(
   (state) => state.userLoggedIn
 );
 
-export const selectUser = createSelector(
-  selectAll,
-  (state) => state.user ? state.user : null
+export const selectUser = createSelector(selectAll, (state) =>
+  state.user ? state.user : null
 );
-
 
 export const selectAuthError = createSelector(
   selectAll,

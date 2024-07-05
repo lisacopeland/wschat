@@ -12,7 +12,6 @@ export class UserMessage {
       this[key] = defaultValues[key];
     });
   }
-
 }
 
 export function mapToUserMessage(data: any): UserMessage {

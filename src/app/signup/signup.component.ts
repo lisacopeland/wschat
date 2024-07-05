@@ -11,17 +11,20 @@ import { selectUserError, selectUserSignedup } from '../+state/user.reducer';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
   form!: FormGroup;
   hasError = false;
   errorMessage = '';
   submitted = false;
-  constructor(private fb: FormBuilder, private router: Router, private store: Store) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
-
     this.store.select(selectUserError).subscribe((userError) => {
       this.hasError = true;
       this.errorMessage = userError;
@@ -35,7 +38,7 @@ export class SignupComponent {
       userName: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      displayName: ['', Validators.required]
+      displayName: ['', Validators.required],
     });
   }
 
@@ -50,16 +53,15 @@ export class SignupComponent {
       userName: this.form.value.userName,
       displayName: this.form.value.displayName,
       createdDate: new Date(),
-      onLine: false
-    }
+      onLine: false,
+    };
     this.store.dispatch(
       signupUserAction({
         payload: {
-          user: newUser
+          user: newUser,
         },
       })
     );
     this.submitted = true;
-
   }
 }

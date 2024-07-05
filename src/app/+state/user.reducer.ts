@@ -5,7 +5,14 @@ import {
   on,
 } from '@ngrx/store';
 import { User, mapToUsers } from '../model/user.model';
-import { loadLoggedInUsersAction, setUsersAction, signupUserAction, userEnteredAction, userExitedAction, userSignedupAction } from './user.actions';
+import {
+  loadLoggedInUsersAction,
+  setUsersAction,
+  signupUserAction,
+  userEnteredAction,
+  userExitedAction,
+  userSignedupAction,
+} from './user.actions';
 
 export interface UserState {
   loggedInUsers: User[];
@@ -16,7 +23,7 @@ export interface UserState {
 const initialState: UserState = {
   loggedInUsers: [],
   userError: null,
-  userSignedup: false
+  userSignedup: false,
 };
 
 export const USER_FEATURE_KEY = 'users';
@@ -31,14 +38,14 @@ export const userReducer = createReducer(
     const newState = {
       ...state,
       loggedInUsers: mapToUsers(action.payload),
-      userError: null
+      userError: null,
     };
     return newState;
   }),
 
   on(userEnteredAction, (state, action) => {
     const newUser = action.payload.user;
-    const users = {...state.loggedInUsers};
+    const users = { ...state.loggedInUsers };
     users.push(newUser);
     const newState = { ...state, loggedInUsers: users, loggedIn: true };
     return newState;
@@ -54,8 +61,8 @@ export const userReducer = createReducer(
   }),
   on(userExitedAction, (state, action) => {
     const loggedOutUserId = action.payload.id;
-    const users = {...state.loggedInUsers };
-    const idx = users.findIndex(x => x._id === loggedOutUserId);
+    const users = { ...state.loggedInUsers };
+    const idx = users.findIndex((x) => x._id === loggedOutUserId);
     if (idx !== -1) {
       users.splice(idx, 1);
     }
@@ -64,8 +71,7 @@ export const userReducer = createReducer(
   })
 );
 
-export const getUsersState =
-  createFeatureSelector<UserState>(USER_FEATURE_KEY);
+export const getUsersState = createFeatureSelector<UserState>(USER_FEATURE_KEY);
 
 export const selectAll = createSelector(
   getUsersState,
@@ -82,4 +88,4 @@ export const selectUserError = createSelector(
 export const selectUserSignedup = createSelector(
   selectAll,
   (state) => state.userSignedup
-)
+);
