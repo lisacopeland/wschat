@@ -16,7 +16,7 @@ const initialState: UserState = {
   loggedInUsers: [],
 };
 
-export const USER_FEATURE_KEY = 'Users';
+export const USER_FEATURE_KEY = 'users';
 
 export const userReducer = createReducer(
   initialState,

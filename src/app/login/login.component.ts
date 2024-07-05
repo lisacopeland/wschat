@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { loginAction } from '../+state/auth.actions';
+import { selectAuthError, selectUserLoggedIn } from '../+state/auth.reducers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +12,22 @@ import { loginAction } from '../+state/auth.actions';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private store: Store) {}
+  hasError = false;
+  errorMessage = '';
+  constructor(private fb: FormBuilder, private router: Router, private store: Store) {}
 
   ngOnInit(): void {
+
+    this.store.select(selectAuthError).subscribe((authError) => {
+      this.hasError = true;
+      this.errorMessage = authError;
+    });
+    this.store.select(selectUserLoggedIn).subscribe((loggedIn) => {
+      if (loggedIn === true) {
+        this.router.navigateByUrl('/chat');
+      }
+    });
+
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -34,5 +49,7 @@ export class LoginComponent implements OnInit {
       })
     );
   }
+
+
 
 }

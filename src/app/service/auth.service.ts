@@ -23,11 +23,11 @@ export class AuthService {
   }
 
   signOut(userId: string) {
-    const authenticationDetails = {
+    const body = {
       id: userId
     };
     const url = `${this.baseAuthUrl}/Logout`;
-    return this.http.put<ApiResponse>(url, authenticationDetails);
+    return this.http.put<ApiResponse>(url, body);
   }
 
   getSignedInUser() {

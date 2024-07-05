@@ -25,7 +25,9 @@ export class ChatComponent implements OnInit {
       this.user = user;
     });
     this.store.select(selectAllMessages).subscribe((messages) => {
-      this.messages = messages;
+      if ((messages !== null) && messages.length) {
+        this.messages = messages;
+      }
     });
     this.form = this.fb.group({
       message: ['', [Validators.maxLength(150), Validators.minLength(3)]]

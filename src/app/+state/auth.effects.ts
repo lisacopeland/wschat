@@ -36,7 +36,7 @@ export class AuthEffects {
             catchError((error) => {
               return of(
                 setAuthErrorAction({
-                  payload: { error: error.message },
+                  payload: { error: error.error.message },
                 })
               );
             })

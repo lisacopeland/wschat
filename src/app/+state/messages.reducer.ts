@@ -24,7 +24,7 @@ const initialState: MessageState = {
   messages: [],
 };
 
-export const MESSAGES_FEATURE_KEY = 'Messages';
+export const MESSAGES_FEATURE_KEY = 'messages';
 
 export const messagesReducer = createReducer(
   initialState,
@@ -56,5 +56,5 @@ export const selectAll = createSelector(
 );
 
 export const selectAllMessages = createSelector(selectAll, (state) =>
-  mapToUserMessages(state.messages)
+  (state.messages !== null && state.messages.length > 0) ? mapToUserMessages(state.messages) : []
 );
