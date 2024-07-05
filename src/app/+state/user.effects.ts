@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from '../service/users.service';
-import { loadLoggedInUsersAction, setUsersAction, signupUserAction, userSignedupAction } from './user.actions';
+import { loadLoggedInUsersAction, setUserErrorAction, setUsersAction, signupUserAction, userSignedupAction } from './user.actions';
+import { of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
@@ -17,6 +18,13 @@ export class UserEffects {
         return this.service.getLoggedInUsers().pipe(
           map((response) => {
             return setUsersAction({ payload: response });
+          }),
+          catchError((error) => {
+            return of(
+              setUserErrorAction({
+                payload: { error: error.error.message },
+              })
+            );
           })
         );
       }, this.concurrentRequests)
@@ -35,6 +43,13 @@ export class UserEffects {
                 return userSignedupAction({
                   payload: { user: user },
                 });
+            }),
+            catchError((error) => {
+              return of(
+                setUserErrorAction({
+                  payload: { error: error.error.message },
+                })
+              );
             })
           );
       }, this.concurrentRequests)

@@ -1,2 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+.page {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.form-control {
+  width: 200px;
+  margin: 20px 0px
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+  margin-top: 20px;
+}

@@ -1,10 +1,10 @@
 export class User {
   _id?: string;
-  email: string;
-  userName: string;
-  displayName: string;
-  createdDate: Date;
-  onLine: boolean;
+  email?: string;
+  userName?: string;
+  displayName?: string;
+  createdDate?: Date;
+  onLine?: boolean;
 
   constructor(defaultValues: Partial<User>) {
     Object.keys(defaultValues).forEach((key) => {

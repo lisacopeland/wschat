@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   items: MenuItem[] = [
     {
       label: 'Logout',
-      icon: 'pi pi-plus',
+      icon: 'pi pi-sign-out',
       command: () => {
         this.logout();
       },
@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
   ];
 
   ngOnInit() {
+    console.log('logged in is ', this.loggedIn);
     this.websocketService.startSocket();
     // See if there is already a loggedin user
     const user = this.authService.getSignedInUser();
@@ -48,14 +49,19 @@ export class AppComponent implements OnInit {
       }
     });
     this.store.select(selectUserLoggedIn).subscribe((isLoggedIn) => {
+
      if (isLoggedIn === false) {
       this.loggedIn = false;
       this.router.navigateByUrl('/login');
      }
+     console.log('logged in is ', this.loggedIn);
     })
   }
 
   logout() {
+    if (this.loggedIn === false) {
+      return;
+    }
     this.loggedIn = false;
 
     this.store.dispatch(

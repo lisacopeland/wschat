@@ -5,15 +5,18 @@ import {
   on,
 } from '@ngrx/store';
 import { User, mapToUsers } from '../model/user.model';
-import { loadLoggedInUsersAction, setUsersAction, userEnteredAction, userExitedAction } from './user.actions';
-import { userLoggedInAction, userLoggedOutAction } from './auth.actions';
+import { loadLoggedInUsersAction, setUsersAction, signupUserAction, userEnteredAction, userExitedAction, userSignedupAction } from './user.actions';
 
 export interface UserState {
   loggedInUsers: User[];
+  userError: string;
+  userSignedup: boolean;
 }
 
 const initialState: UserState = {
   loggedInUsers: [],
+  userError: '',
+  userSignedup: false
 };
 
 export const USER_FEATURE_KEY = 'users';
@@ -40,6 +43,14 @@ export const userReducer = createReducer(
     return newState;
   }),
 
+  on(userSignedupAction, (state, action) => {
+    const newState = { ...state, userSignedup: true };
+    return newState;
+  }),
+  on(signupUserAction, (state, action) => {
+    const newState = { ...state, userSignedup: false };
+    return newState;
+  }),
   on(userExitedAction, (state, action) => {
     const loggedOutUserId = action.payload.id;
     const users = {...state.loggedInUsers };
@@ -63,3 +74,11 @@ export const selectAll = createSelector(
 export const selectAllLoggedInUsers = createSelector(selectAll, (state) =>
   mapToUsers(state.loggedInUsers)
 );
+export const selectUserError = createSelector(
+  selectAll,
+  (state) => state.userError
+);
+export const selectUserSignedup = createSelector(
+  selectAll,
+  (state) => state.userSignedup
+)

@@ -9,7 +9,7 @@ import { ApiResponse } from '../model/ApiResponse.model';
 })
 export class UserService {
 
-  baseUserUrl = 'https://localhost:7008/api/users';
+  baseUserUrl = 'https://localhost:7008/api/user';
   constructor(private http: HttpClient) {}
 
   getLoggedInUsers(): Observable<User[]> {

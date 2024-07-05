@@ -1,1 +1,59 @@
-<p>signup works!</p>
+<div class="page">
+  <div style="margin: 20px 0px">Signup for the app</div>
+  <form [formGroup]="form" id="form" (ngSubmit)="onSubmit()">
+    <div>
+      <div class="form-control">
+        <input
+          id="userName"
+          pInputText
+          type="text"
+          formControlName="userName"
+          placeholder="User name"
+        />
+      </div>
+      <div class="form-control">
+        <input
+          id="password"
+          pInputText
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+        </div>
+        <div class="form-control">
+          <input
+            id="email"
+            pInputText
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-control">
+          <input
+            id="displayName"
+            pInputText
+            type="text"
+            formControlName="displayName"
+            placeholder="Display Name"
+          />
+      </div>
+      <div class="button-row">
+        <p-button
+          class="submit-button"
+          [disabled]="!form.valid"
+          id="submit"
+          type="submit"
+          label="Submit"
+        />
+        <p-button
+          routerLink="/login"
+          [text]="true"
+          label="Switch to login"
+          severity="secondary"
+        />
+      </div>
+    </div>
+  </form>
+  <div class="error-message" *ngIf="hasError">{{errorMessage}}</div>
+</div>

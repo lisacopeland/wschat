@@ -30,5 +30,9 @@ export const userSignedupAction = createAction(
   'Users: User Signed Up',
   props<{ payload: { user: User } }>()
 );
+export const setUserErrorAction = createAction(
+  'Users: Sign up Error',
+  props<{ payload: { error: string } }>()
+);
 
 
