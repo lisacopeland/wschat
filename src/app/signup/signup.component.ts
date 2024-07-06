@@ -43,7 +43,6 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    console.log(this.form);
     this.signup();
   }
 

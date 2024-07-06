@@ -23,10 +23,9 @@ export class WebsocketService {
   startSocket() {
     this.socket = new WebSocket(this.wsUrl);
     this.socket.addEventListener('open', (ev) => {
-      console.log('opened');
+      console.log('ws opened');
     });
     this.socket.addEventListener('message', (ev) => {
-      console.log('message:', ev.data);
       const action = ev.data['action'];
       switch (action) {
         case 'UserMessages: Created': {
