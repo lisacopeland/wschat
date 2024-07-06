@@ -21,15 +21,22 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
-  title = 'ws-chat';
   currentUser: User;
   loggedIn = false;
+  showDialog = false;
   items: MenuItem[] = [
     {
       label: 'Logout',
       icon: 'pi pi-sign-out',
       command: () => {
         this.logout();
+      },
+    },
+    {
+      label: 'About',
+      icon: 'pi pi-info-circle',
+      command: () => {
+        this.showAbout();
       },
     },
   ];
@@ -60,6 +67,10 @@ export class AppComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     });
+  }
+
+  showAbout() {
+    this.showDialog = true;
   }
 
   logout() {

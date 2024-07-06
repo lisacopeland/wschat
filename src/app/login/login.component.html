@@ -1,5 +1,5 @@
 <div class="page">
-  <div style="margin: 20px 0px">Login to the app</div>
+  <p-card header="Login to the app">
   <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="onSubmit()">
     <div>
       <div class="form-control">
@@ -38,4 +38,5 @@
     </div>
   </form>
   <div class="error-message" *ngIf="hasError">{{ errorMessage }}</div>
+</p-card>
 </div>

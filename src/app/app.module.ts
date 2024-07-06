@@ -15,6 +15,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
@@ -24,6 +25,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { SignupComponent } from './signup/signup.component';
 import { userReducer } from './+state/user.reducer';
@@ -52,6 +54,7 @@ import { UserlistComponent } from './userlist/userlist.component';
     ButtonModule,
     CardModule,
     DialogModule,
+    FloatLabelModule,
     InputTextareaModule,
     InputTextModule,
     MenuModule,
@@ -61,6 +64,7 @@ import { UserlistComponent } from './userlist/userlist.component';
     TableModule,
     TagModule,
     ToastModule,
+    TooltipModule,
     StoreModule.forRoot({
       messages: messagesReducer,
       users: userReducer,

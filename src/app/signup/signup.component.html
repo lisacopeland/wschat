@@ -1,5 +1,5 @@
 <div class="page">
-  <div style="margin: 20px 0px">Signup for the app</div>
+  <p-card header = "Signup for Chat App">
   <form [formGroup]="form" id="form" (ngSubmit)="onSubmit()">
     <div>
       <div class="form-control">
@@ -56,4 +56,5 @@
     </div>
   </form>
   <div class="error-message" *ngIf="hasError">{{ errorMessage }}</div>
+</p-card>
 </div>
