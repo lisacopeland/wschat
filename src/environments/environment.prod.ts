@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:7008',
-  wsUrl: 'wss://localhost:7008/ws'
+  apiUrl: 'http://corvidi.com',
+  wsUrl: 'wss://corvidi.com/ws'
 };

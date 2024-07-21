@@ -1,0 +1,7 @@
+{
+  "name": "ws-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
