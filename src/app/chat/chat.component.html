@@ -10,7 +10,7 @@
   >
     <!-- this is where the current messages go -->
 
-    <p-card class="message" *ngFor="let message of messages$ | async">
+    <p-card class="message" *ngFor="let message of messages">
       <div>{{ message.message }}</div>
 
       <div class="message-footer">
@@ -24,7 +24,7 @@
     <div class="textbox">
       <!-- the text window -->
        <p-floatLabel>
-      <textarea id="message" pInputTextarea formControlName="message" rows="5" cols="130">
+      <textarea id="message" pInputTextarea formControlName="message" rows="5" cols="30">
       </textarea>
       <label for="message">What is going on with you?</label>
     </p-floatLabel>

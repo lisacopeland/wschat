@@ -1,15 +1,31 @@
 export class User {
-  _id?: string;
+  id?: string;
   email?: string;
   userName?: string;
   displayName?: string;
   createdDate?: Date;
-  onLine?: boolean;
+  online?: boolean;
 
   constructor(defaultValues: Partial<User>) {
     Object.keys(defaultValues).forEach((key) => {
-      this[key] = defaultValues[key];
+      if (key === 'createdDate') {
+        const str = defaultValues[key].toString();
+       this[key] = new Date(Date.parse(str))
+      } else {
+        this[key] = defaultValues[key];
+      }
     });
+  }
+}
+
+export function mapFromWsUser(data: any): User {
+  return {
+    id: data.Id,
+    email: data.Email,
+    userName: data.UserName,
+    online: data.Online,
+    displayName: data.DisplayName,
+    createdDate: new Date(Date.parse(data.CreatedDate))
   }
 }
 

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { UserMessage } from '../model/message.model';
+import { mapFromWsMessage, UserMessage } from '../model/message.model';
 import { userMessageCreatedAction } from '../+state/messages.actions';
 import { Store } from '@ngrx/store';
 import { userEnteredAction, userExitedAction } from '../+state/user.actions';
 import { environment } from '../../environments/environment';
+import { mapFromWsUser, User } from '../model/user.model';
 
 export interface WebSocketAction {
   action: string;
@@ -15,40 +16,52 @@ export interface WebSocketAction {
   providedIn: 'root',
 })
 export class WebsocketService {
-  private socket: WebSocket;
+  private socket: WebSocket = null;
   wsUrl = environment.wsUrl;
 
   constructor(private store: Store) {}
 
   startSocket() {
-    this.socket = new WebSocket(this.wsUrl);
-    this.socket.addEventListener('open', (ev) => {
-      console.log('ws opened');
-    });
+    if (this.socket === null) {
+      this.socket = new WebSocket(this.wsUrl);
+      this.socket.addEventListener('open', (ev) => {
+        console.log('ws opened');
+      });
+      this.addListeners();
+    }
+  }
+
+  addListeners() {
     this.socket.addEventListener('message', (ev) => {
-      const action = ev.data['action'];
+      console.log('got a message: ', ev);
+      const data = JSON.parse(ev.data);
+      const action = data['Action'];
+      const payload = data['Payload'];
+      console.log('action: ', action);
+      console.log('payload ', payload);
       switch (action) {
         case 'UserMessages: Created': {
+          const userMessage = mapFromWsMessage(payload.MessageClass);
           this.store.dispatch(
             userMessageCreatedAction({
-              payload: { userMessage: ev.data['payload'] },
+              payload: { userMessage: userMessage },
             })
           );
           break;
         }
         case 'Users: User Entered': {
-          this.store.dispatch(
-            userEnteredAction({ payload: ev.data['payload'] })
-          );
+          const user: User = mapFromWsUser(payload.UserClass);
+          this.store.dispatch(userEnteredAction({ payload: { user: user } }));
           break;
         }
         case 'Users: User Exited': {
           this.store.dispatch(
-            userExitedAction({ payload: ev.data['payload'] })
+            userExitedAction({ payload: { id: payload.id } })
           );
           break;
         }
         default: {
+          console.log('unknown action received', action);
           // Got a websocket message I am not interested in
           break;
         }

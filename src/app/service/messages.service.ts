@@ -30,7 +30,7 @@ export class UserMessagesService {
 
   updateUserMessage(UserMessage: UserMessage) {
     return this.http.put<ApiResponse>(
-      `${this.baseUserMessageUrl}/${UserMessage._id}`,
+      `${this.baseUserMessageUrl}/${UserMessage.id}`,
       UserMessage
     );
   }

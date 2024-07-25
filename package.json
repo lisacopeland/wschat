@@ -26,6 +26,7 @@
     "@ngrx/effects": "^17.2.0",
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
+    "date-fns": "^3.6.0",
     "ionicons": "^7.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.2",

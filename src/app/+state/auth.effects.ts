@@ -44,7 +44,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(logOutUserAction),
       mergeMap((action) => {
-        return this.service.signOut(action.payload.user._id).pipe(
+        return this.service.signOut(action.payload.user.id).pipe(
           map((response) => {
             return userLoggedOutAction({
               payload: {},

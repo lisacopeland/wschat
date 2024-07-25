@@ -44,9 +44,15 @@ export const userReducer = createReducer(
   }),
 
   on(userEnteredAction, (state, action) => {
-    const newUser = action.payload.user;
-    const users = { ...state.loggedInUsers };
-    users.push(newUser);
+    const newUser = new User(action.payload.user);
+    newUser.online = true;
+    const users = [ ...state.loggedInUsers ];
+    const userIdx = users.findIndex(x => x.id === newUser.id);
+    if (userIdx === -1) {
+      users.push(newUser);
+    } else {
+      users.splice(userIdx, 1, newUser);
+    }
     const newState = { ...state, loggedInUsers: users, loggedIn: true };
     return newState;
   }),
@@ -61,10 +67,12 @@ export const userReducer = createReducer(
   }),
   on(userExitedAction, (state, action) => {
     const loggedOutUserId = action.payload.id;
-    const users = { ...state.loggedInUsers };
-    const idx = users.findIndex((x) => x._id === loggedOutUserId);
+    const users = [ ...state.loggedInUsers ];
+    const idx = users.findIndex((x) => x.id === loggedOutUserId);
     if (idx !== -1) {
-      users.splice(idx, 1);
+      const user = new User(users[idx]);
+      user.online = false;
+      users.splice(idx, 1, user);
     }
     const newState = { ...state, loggedInUsers: users };
     return newState;

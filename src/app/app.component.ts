@@ -8,6 +8,7 @@ import { User } from './model/user.model';
 import { selectUser, selectUserLoggedIn } from './+state/auth.reducers';
 import { AuthService } from './service/auth.service';
 import { environment } from '../environments/environment';
+import { loadLoggedInUsersAction } from './+state/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -49,6 +50,7 @@ export class AppComponent implements OnInit {
       environment.apiUrl
     );
     this.websocketService.startSocket();
+    this.store.dispatch(loadLoggedInUsersAction({ payload: {} }));
     // See if there is already a loggedin user
     const user = this.authService.getSignedInUser();
     if (user !== null) {

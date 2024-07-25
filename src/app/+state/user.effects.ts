@@ -43,7 +43,7 @@ export class UserEffects {
         return this.service.createUser(action.payload.user).pipe(
           map((response) => {
             const user = { ...action.payload.user };
-            user._id = response.id;
+            user.id = response.id;
             return userSignedupAction({
               payload: { user: user },
             });

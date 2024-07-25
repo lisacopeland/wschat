@@ -52,7 +52,7 @@ export class SignupComponent {
       userName: this.form.value.userName,
       displayName: this.form.value.displayName,
       createdDate: new Date(),
-      onLine: false,
+      online: false,
     };
     this.store.dispatch(
       signupUserAction({

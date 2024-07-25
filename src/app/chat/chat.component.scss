@@ -30,6 +30,11 @@
   margin-bottom: 20px;
 }
 
+textarea {
+  width: 99%;
+  display: block;
+ }
+
 .message {
   display: flex;
   flex-direction: column;
