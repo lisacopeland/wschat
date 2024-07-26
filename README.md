@@ -1,6 +1,6 @@
 # WsChat
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+This is the front end for my websockets chat app. The purpose of this project was to show how to use websockets to send ngrx actions to the frontend for a more dynamic user experience. You can see it running at http://wschatfrontend.s3-website-us-west-2.amazonaws.com/
 
 ## Development server
 
