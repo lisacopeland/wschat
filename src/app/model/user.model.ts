@@ -3,6 +3,7 @@ export class User {
   email?: string;
   userName?: string;
   displayName?: string;
+  avatarUrl?: string;
   createdDate?: Date;
   online?: boolean;
 
@@ -23,6 +24,7 @@ export function mapFromWsUser(data: any): User {
     id: data.Id,
     email: data.Email,
     userName: data.UserName,
+    avatarUrl: data.AvatarUrl,
     online: data.Online,
     displayName: data.DisplayName,
     createdDate: new Date(Date.parse(data.CreatedDate))

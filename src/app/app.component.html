@@ -1,11 +1,12 @@
 <p-menu #menu [model]="items" popup="true" appendTo="body" />
 
-<div class="page">
+<div class="app-wrapper">
   <div class="header">
     <h3>Chat App</h3>
     <div class="header-name">
       <div *ngIf="loggedIn">Hello {{ currentUser?.displayName }}</div>
-      <p-button
+ <!--      <div class="avatar"><img [src]="currentUser.avatarUrl" height="30"></div>
+ -->      <p-button
         (click)="menu.toggle($event)"
         icon="pi pi-bars"
         [rounded]="true"
@@ -21,7 +22,7 @@
   <p>
   This is a portfolio project implemented by me - Lisa Copeland. This angular 17 app and
   it's backend dotnet c# api illustrate using websockets to send ngrx messages from the backend
-  to the frontend. It uses Mongodb atlas for persistent storage and primeng UI elements.</p>
+  to the frontend. It uses DynamoDB for persistent storage and primeng UI elements.</p>
 
   <p>You can see this project and some of my others at my <a href="https://github.com/lisacopeland" target="_blank">Github Portfolio</a>.</p>
 

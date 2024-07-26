@@ -42,10 +42,7 @@ export class UserMessagesEffects {
       ofType(createUserMessageAction),
       mergeMap((action) => {
         return this.service.createUserMessage(action.payload).pipe(
-          map((response) => {
-            return userMessageCreatedAction({
-              payload: { userMessage: action.payload },
-            });
+          map(() => {
           }),
           catchError((error) => {
             return of(
@@ -56,6 +53,6 @@ export class UserMessagesEffects {
           })
         );
       }, this.concurrentRequests)
-    )
-  );
+    ), { dispatch: false }
+  )
 }

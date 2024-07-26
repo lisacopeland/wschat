@@ -15,6 +15,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
+import { EditorModule } from 'primeng/editor';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
@@ -54,6 +55,7 @@ import { UserlistComponent } from './userlist/userlist.component';
     ButtonModule,
     CardModule,
     DialogModule,
+    EditorModule,
     FloatLabelModule,
     InputTextareaModule,
     InputTextModule,

@@ -1,47 +1,47 @@
 <div class="page">
-  <p-card header="Chat">
-  <div class="user-button-row">
-    <p-button icon="pi pi-user" [rounded]="true" (click)="openUserSidebar()" pTooltip="Click to open the user sidebar" tooltipPosition="left"/>
+  <div class="chat-body">
+    <div class="icon-button-row">
+    <p-button
+      icon="pi pi-user"
+      [rounded]="true"
+      (click)="openUserSidebar()"
+      pTooltip="Click to open the user sidebar"
+      tooltipPosition="left"
+    />
   </div>
-  <p-scrollPanel
-    styleClass="custombar2"
-    scrollTop="10000"
-    [style]="{ width: '100%', height: '475px' }"
-  >
-    <!-- this is where the current messages go -->
 
-    <p-card class="message" *ngFor="let message of messages">
-      <div>{{ message.message }}</div>
+    <p-scrollPanel>
+      <!-- this is where the current messages go -->
 
-      <div class="message-footer">
-        <p>{{ message.userName }}</p>
-        <p>{{ message.messageDate | date : "medium" }}</p>
+      <p-card *ngFor="let message of messages$ | async">
+        <div [innerHTML]="message.message"></div>
+
+        <div class="message-footer">
+          <p>{{ message.userName }}</p>
+          <p>{{ message.messageDate | date : 'medium' }}</p>
+        </div>
+      </p-card>
+    </p-scrollPanel>
+  </div>
+
+  <div class="chat-footer">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="textbox">
+        <!-- the text window -->
+        <p-editor formControlName="message" [style]="{ height: '220px' }" />
       </div>
-    </p-card>
-  </p-scrollPanel>
-  <div style="margin-top: 15px;">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="textbox">
-      <!-- the text window -->
-       <p-floatLabel>
-      <textarea id="message" pInputTextarea formControlName="message" rows="5" cols="30">
-      </textarea>
-      <label for="message">What is going on with you?</label>
-    </p-floatLabel>
-    </div>
-    <div class="button-row">
-      <p-button type="submit" label="Submit" [disabled]="!form.valid" />
-      <p-button
-        label="Clear"
-        severity="secondary"
-        type="button"
-        (click)="onClear()"
-      />
-    </div>
-    <div class="error-message" *ngIf="hasError">{{ errorMessage }}</div>
-  </form>
-</div>
-</p-card>
+      <div class="button-row">
+        <p-button type="submit" label="Submit" [disabled]="!form.valid" />
+        <p-button
+          label="Clear"
+          severity="secondary"
+          type="button"
+          (click)="onClear()"
+        />
+      </div>
+      <div class="error-message" *ngIf="hasError">{{ errorMessage }}</div>
+    </form>
+  </div>
 </div>
 
 <p-sidebar

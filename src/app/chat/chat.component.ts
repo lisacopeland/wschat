@@ -26,7 +26,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatComponent implements OnInit {
   messages$: Observable<UserMessage[]> = this.store.select(selectAllMessages);
-  messages: UserMessage[] = [];
+
   user: User;
   loggedInUsers$: Observable<User[]> = this.store.select(
     selectAllLoggedInUsers
@@ -41,10 +41,6 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(loadUserMessagesAction({ payload: {} }));
 
-    this.store.select(selectAllMessages).subscribe(x => {
-      console.log('messages is now ', x);
-      this.messages = x;
-    })
     this.store.select(selectUser).subscribe((user) => {
       this.user = user;
     });

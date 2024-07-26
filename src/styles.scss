@@ -1,9 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+@import "quill/dist/quill.snow.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.app-wrapper {
+  height: 100vh;
+	display: flex;
+  flex: 1;
+	flex-direction: column;
+}
+
 .page {
   display: flex;
+  height: calc(100vh - 80px);
+  flex: 1;
   flex-direction: column;
-  margin: 10px;
 }
 
 .button-row {

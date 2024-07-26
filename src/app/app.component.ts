@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
+  // avatarUrl = `https://wschatavatars.s3.us-west-2.amazonaws.com/Lisacope.jpg`;
   currentUser: User;
   loggedIn = false;
   showDialog = false;

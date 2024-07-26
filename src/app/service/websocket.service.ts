@@ -33,12 +33,9 @@ export class WebsocketService {
 
   addListeners() {
     this.socket.addEventListener('message', (ev) => {
-      console.log('got a message: ', ev);
       const data = JSON.parse(ev.data);
       const action = data['Action'];
       const payload = data['Payload'];
-      console.log('action: ', action);
-      console.log('payload ', payload);
       switch (action) {
         case 'UserMessages: Created': {
           const userMessage = mapFromWsMessage(payload.MessageClass);
@@ -61,8 +58,7 @@ export class WebsocketService {
           break;
         }
         default: {
-          console.log('unknown action received', action);
-          // Got a websocket message I am not interested in
+          console.warn('unknown action received', action);
           break;
         }
       }
