@@ -21,11 +21,22 @@
   flex-direction: column;
 }
 
-.message-footer {
+.message-row {
   display: flex;
   flex-direction: row;
+  align-content: center;
+}
+
+.message-header {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
   gap: 20px;
   font-size: small;
+}
+
+.message-body {
+  margin-left: 20px;
 }
 
 // for the message card
@@ -42,5 +53,5 @@
 
 
 ::ng-deep .p-scrollpanel {
-  height: calc(100vh - 525px);
+  height: calc(100vh - 425px);
 }

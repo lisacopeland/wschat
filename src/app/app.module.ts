@@ -12,6 +12,7 @@ import { messagesReducer } from './+state/messages.reducer';
 import { UserMessagesEffects } from './+state/messages.effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
@@ -37,6 +38,7 @@ import { authReducer } from './+state/auth.reducers';
 import { AuthEffects } from './+state/auth.effects';
 import { ErrorInterceptor } from './service/http.interceptor';
 import { UserlistComponent } from './userlist/userlist.component';
+import { InitialPipe } from './service/inital.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { UserlistComponent } from './userlist/userlist.component';
     ChatComponent,
     LoginComponent,
     UserlistComponent,
+    InitialPipe,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { UserlistComponent } from './userlist/userlist.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AvatarModule,
     ButtonModule,
     CardModule,
     DialogModule,

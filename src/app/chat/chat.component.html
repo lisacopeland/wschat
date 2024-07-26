@@ -14,12 +14,23 @@
       <!-- this is where the current messages go -->
 
       <p-card *ngFor="let message of messages$ | async">
-        <div [innerHTML]="message.message"></div>
-
-        <div class="message-footer">
+        <div class="message-row">
+          <p-avatar
+          label = "{{ message.userName | initial }}"
+          size="normal"
+          shape="circle"
+          [style]="{ 'background-color': '#2563EB', color: 'white' }"
+           />
+        <div>
+        <div class="message-header">
           <p>{{ message.userName }}</p>
           <p>{{ message.messageDate | date : 'medium' }}</p>
         </div>
+        <div class="message-body" [innerHTML]="message.message"></div>
+        </div>
+      </div>
+
+
       </p-card>
     </p-scrollPanel>
   </div>
@@ -28,7 +39,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="textbox">
         <!-- the text window -->
-        <p-editor formControlName="message" [style]="{ height: '220px' }" />
+        <p-editor formControlName="message" [style]="{ height: '100px' }" />
       </div>
       <div class="button-row">
         <p-button type="submit" label="Submit" [disabled]="!form.valid" />

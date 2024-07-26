@@ -30,11 +30,6 @@ export function mapToUserMessage(data: any): UserMessage {
 export function mapToUserMessages(data: any[]): UserMessage[] {
   if (data !== undefined && data.length) {
     const allData = data.map(mapToUserMessage);
-    allData.sort((a, b) => {
-      const bDate = new Date(b.messageDate);
-      const aDate = new Date(a.messageDate);
-      return bDate.getTime() - aDate.getTime();
-    });
     return allData;
   } else {
     return [];

@@ -28,19 +28,19 @@ export class AppComponent implements OnInit {
   showDialog = false;
   items: MenuItem[] = [
     {
-      label: 'Logout',
-      icon: 'pi pi-sign-out',
-      command: () => {
-        this.logout();
-      },
-    },
-    {
       label: 'About',
       icon: 'pi pi-info-circle',
       command: () => {
         this.showAbout();
       },
     },
+    {
+      label: 'Logout',
+      icon: 'pi pi-sign-out',
+      command: () => {
+        this.logout();
+      },
+    }
   ];
 
   ngOnInit() {
