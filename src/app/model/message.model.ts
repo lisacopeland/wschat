@@ -4,9 +4,11 @@ export function deepCopy<T>(obj: T): T {
 }
 export class UserMessage {
   id?: string;
-  userName: string;
-  message: string;
-  messageDate: Date;
+  userName?: string;
+  message?: string;
+  messageDate?: Date;
+  displayName?: string;
+  online?: boolean;
 
   constructor(defaultValues: Partial<UserMessage>) {
     Object.keys(defaultValues).forEach((key) => {

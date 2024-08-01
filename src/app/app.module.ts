@@ -13,6 +13,7 @@ import { UserMessagesEffects } from './+state/messages.effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
@@ -56,6 +57,7 @@ import { InitialPipe } from './service/inital.pipe';
     HttpClientModule,
     ReactiveFormsModule,
     AvatarModule,
+    BadgeModule,
     ButtonModule,
     CardModule,
     DialogModule,

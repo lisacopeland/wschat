@@ -35,8 +35,18 @@
   font-size: small;
 }
 
-.message-body {
-  margin-left: 20px;
+.message-user {
+  background-color: white;
+  color: #4d4d4d;
+}
+
+.message-other {
+  background-color: white;
+  color: #4d4d4d;
+}
+
+.message-text {
+  font-size: 110%;
 }
 
 // for the message card

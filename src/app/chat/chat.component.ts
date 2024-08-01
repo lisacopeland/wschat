@@ -54,6 +54,7 @@ export class ChatComponent implements OnInit {
       this.hasError = true;
       this.errorMessage = userError;
     });
+
     this.form = this.fb.group({
       message: ['', [Validators.maxLength(150), Validators.minLength(3)]],
     });

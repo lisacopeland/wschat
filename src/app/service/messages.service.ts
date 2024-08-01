@@ -18,7 +18,7 @@ export class UserMessagesService {
   }
 
   getUserMessages(): Observable<UserMessage[]> {
-    return this.http.get<UserMessage[]>(`${this.baseUserMessageUrl}`);
+    return this.http.get<UserMessage[]>(`${this.baseUserMessageUrl}/GetChatMessages`);
   }
 
   createUserMessage(UserMessage: UserMessage) {
